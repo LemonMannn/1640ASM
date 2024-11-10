@@ -1,0 +1,88 @@
+﻿@model Idea.Models.NIdea
+
+@{
+    ViewData["Title"] = "Details";
+
+    var Comments = (List<Comment>)ViewData["Comments"];
+}
+
+<h1 style="font-family: Arial, sans-serif; font-size: 1.5rem; color: #333;">Details</h1>
+
+<div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h4 style="color: #555;">NIdea</h4>
+    <hr style="border: 1px solid #ddd; margin: 10px 0;" />
+    <dl class="row">
+        <dt class="col-sm-2" style="font-weight: bold; color: #333;">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10" style="color: #444;">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2" style="font-weight: bold; color: #333;">
+            @Html.DisplayNameFor(model => model.Brief)
+        </dt>
+        <dd class="col-sm-10" style="color: #444;">
+            @Html.DisplayFor(model => model.Brief)
+        </dd>
+        <dt class="col-sm-2" style="font-weight: bold; color: #333;">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class="col-sm-10" style="color: #444;">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt class="col-sm-2" style="font-weight: bold; color: #333;">
+            @Html.DisplayNameFor(model => model.FilePath)
+        </dt>
+        <dd class="col-sm-10" style="color: #444;">
+            @Html.DisplayFor(model => model.FilePath)
+        </dd>
+        <dt class="col-sm-2" style="font-weight: bold; color: #333;">
+            @Html.DisplayNameFor(model => model.View)
+        </dt>
+        <dd class="col-sm-10" style="color: #444;">
+            @Html.DisplayFor(model => model.View)
+        </dd>
+        <dt class="col-sm-2" style="font-weight: bold; color: #333;">
+            @Html.DisplayNameFor(model => model.Submission)
+        </dt>
+        <dd class="col-sm-10" style="color: #444;">
+            @Html.DisplayFor(model => model.Submission.Id)
+        </dd>
+        <dt class="col-sm-2" style="font-weight: bold; color: #333;">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10" style="color: #444;">
+            @Html.DisplayFor(model => model.Category.Id)
+        </dd>
+        <dt class="col-sm-2" style="font-weight: bold; color: #333;">
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd class="col-sm-10" style="color: #444;">
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+    </dl>
+</div>
+
+@if (Model.Submission.Deadline_2 >= DateTime.Now)
+{
+    <form class="input-group mb-3" asp-action="Comment">
+        <input type="hidden" name="IdeaId" value="@Model.Id" />
+        <input type="text" class="form-control" placeholder="Comment" name="Content">
+        <button class="btn btn-outline-success" type="submit">Comment</button>
+    </form>
+}
+
+<div>
+    <h5 style="color: #555;">Comments</h5>
+    @foreach (var comment in Comments)
+    {
+        <hr />
+        <div style="color: #444;">(@comment.Created_Date) - @comment.Content</div>
+    }
+</div>
+
+<hr />
+
+<div style="margin-top: 15px;">
+    <a asp-action="ViewIdeas" asp-route-submissionid="@Model.SubmissionId" style="color: #009879; text-decoration: none; font-size: 1rem;">Back to List</a>
+</div>

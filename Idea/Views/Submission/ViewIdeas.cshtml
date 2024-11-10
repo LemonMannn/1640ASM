@@ -1,0 +1,77 @@
+﻿@model Idea.Models.Submission
+
+@{
+    ViewData["Title"] = "Details";
+    var Ideas = (List<NIdea>)ViewData["Ideas"];
+}
+
+<h1 style="font-family: Arial, sans-serif; font-size: 1.5rem; color: #333;">Details</h1>
+
+<div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h4 style="color: #555;">Submission</h4>
+    <hr style="border: 1px solid #ddd; margin: 10px 0;" />
+    <dl class="row">
+        <dt class="col-sm-2" style="font-weight: bold; color: #333;">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10" style="color: #444;">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2" style="font-weight: bold; color: #333;">
+            @Html.DisplayNameFor(model => model.Deadline_1)
+        </dt>
+        <dd class="col-sm-10" style="color: #444;">
+            @Html.DisplayFor(model => model.Deadline_1)
+        </dd>
+        <dt class="col-sm-2" style="font-weight: bold; color: #333;">
+            @Html.DisplayNameFor(model => model.Deadline_2)
+        </dt>
+        <dd class="col-sm-10" style="color: #444;">
+            @Html.DisplayFor(model => model.Deadline_2)
+        </dd>
+    </dl>
+</div>
+
+@if ((DateTime.Now - Model.Deadline_1).TotalMilliseconds <= 0)
+{
+    <div style="margin-top: 15px;">
+        <a asp-action="AddIdea" asp-route-submissionid="@Model.Id" class="btn btn-success" style="padding: 8px 16px; border-radius: 4px; margin-top: 10px;">Add Idea</a>
+    </div>
+}
+
+<div style="margin-top: 20px;">
+    <h4 style="color: #555;">List of Ideas</h4>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 1rem; font-family: Arial, sans-serif;">
+        <thead>
+            <tr style="background-color: #009879; color: #ffffff;">
+                <th style="padding: 12px 15px; border: 1px solid #ddd;">Title</th>
+                <th style="padding: 12px 15px; border: 1px solid #ddd;">Brief</th>
+                <th style="padding: 12px 15px; border: 1px solid #ddd;">Views</th>
+                <th style="padding: 12px 15px; border: 1px solid #ddd;">Like</th>
+                <th style="padding: 12px 15px; border: 1px solid #ddd;">Dislike</th>
+                <th style="padding: 12px 15px; border: 1px solid #ddd;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var idea in Ideas)
+            {
+                <tr style="border-bottom: 1px solid #dddddd;">
+                    <td style="padding: 12px 15px; border: 1px solid #ddd;">@idea.Title</td>
+                    <td style="padding: 12px 15px; border: 1px solid #ddd;">@idea.Brief</td>
+                    <td style="padding: 12px 15px; border: 1px solid #ddd;">@idea.View</td>
+                    <td style="padding: 12px 15px; border: 1px solid #ddd;">@idea.Reactions.Where(r => r.Type == 1).Count()</td>
+                    <td style="padding: 12px 15px; border: 1px solid #ddd;">@idea.Reactions.Where(r => r.Type == 2).Count()</td>
+                    <td style="padding: 12px 15px; border: 1px solid #ddd;">
+                        <a asp-action="IdeaDetails" class="btn btn-primary" asp-route-id="@idea.Id" style="padding: 5px 10px; margin-right: 5px;">Details</a>
+                        <a asp-action="Like" class="btn btn-primary" asp-route-ideaid="@idea.Id" style="padding: 5px 10px; margin-right: 5px;">Like</a>
+                        <a asp-action="Dislike" class="btn btn-primary" asp-route-ideaid="@idea.Id" style="padding: 5px 10px;">Dislike</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div style="margin-top: 15px;">
+    <a asp-action="Index" style="color: #009879; text-decoration: none; font-size: 1rem;">Back to List</a>
+</div>

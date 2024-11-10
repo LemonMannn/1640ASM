@@ -1,0 +1,50 @@
+﻿/* Sidebar Styles */
+.sidebar {
+  min-width: 170px;
+  max-width: 220px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  transition: width 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.collapsed {
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.sidebar .login-partial {
+  padding: 10px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.content {
+  margin-left: 250px;
+  transition: margin-left 0.3s;
+}
+
+.content.expanded {
+  margin-left: 0;
+}
+
+a.nav-link {
+  color: #0077cc;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  transition: left 0.3s;
+}
+
+.footer.expanded {
+  left: 0;
+  width: 100%;
+}
+

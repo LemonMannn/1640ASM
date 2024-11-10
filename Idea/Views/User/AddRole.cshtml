@@ -1,0 +1,70 @@
+﻿@model Idea.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Assign Roles";
+
+    var currentRoles = (List<Microsoft.AspNetCore.Identity.IdentityRole>) ViewData["currentRoles"];
+    var remainingRoles = (List<Microsoft.AspNetCore.Identity.IdentityRole>) ViewData["remainingRoles"];
+}
+
+<h1 style="font-family: Arial, sans-serif; font-size: 1.5rem; color: #333; text-align: center;">@ViewData["Title"] (<em>@Model.UserName</em>)</h1>
+
+<div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 600px; margin: auto;">
+    <!-- Remaining Roles Section (Moved above) -->
+    <h4 style="color: #555; font-weight: bold; text-align: center;">Remaining Roles</h4>
+    <hr style="border: 1px solid #ddd; margin: 10px 0;" />
+
+    @if (remainingRoles.Count == 0)
+    {
+        <div style="color: #777; text-align: center;">There are no more roles to add.</div>
+    }
+    else
+    {
+        foreach (var role in remainingRoles)
+        {
+            <div class="d-flex align-items-center mb-2" style="padding: 10px; background-color: #e9ecef; border-radius: 4px;">
+                <div style="font-weight: bold; color: #333;">@role.Name</div>
+                <div class="ml-auto">
+                    <form asp-action="AddRole" style="display: inline;">
+                        <input type="hidden" name="userId" value="@Model.Id" />
+                        <input type="hidden" name="roleId" value="@role.Id" />
+                        <button type="submit" class="btn btn-success btn-sm" style="border-radius: 4px;">
+                            Add
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+    }
+
+    <!-- Current Roles Section (Moved below) -->
+    <h4 style="color: #555; font-weight: bold; text-align: center; margin-top: 30px;">Current Roles</h4>
+    <hr style="border: 1px solid #ddd; margin: 10px 0;" />
+
+    @if (currentRoles.Count == 0)
+    {
+        <div style="color: #777; text-align: center;">There is no current role.</div>
+    }
+    else
+    {
+        foreach (var role in currentRoles)
+        {
+            <div class="d-flex align-items-center mb-2" style="padding: 10px; background-color: #e9ecef; border-radius: 4px;">
+                <div style="font-weight: bold; color: #333;">@role.Name</div>
+                <div class="ml-auto">
+                    <form asp-action="DeleteRole" style="display: inline;">
+                        <input type="hidden" name="userId" value="@Model.Id" />
+                        <input type="hidden" name="roleId" value="@role.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm" style="border-radius: 4px;">
+                            Remove
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div style="margin-top: 20px; text-align: center;">
+    <a asp-action="Index" style="color: #009879; text-decoration: none; font-size: 1rem;">Back to List</a>
+</div>

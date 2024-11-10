@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Idea.Models.Submission>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Submission</h1>
+
+
+<table style="width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 1rem; font-family: Arial, sans-serif; min-width: 400px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <thead>
+        <tr style="background-color: #009879; color: #ffffff; text-align: left;">
+            <th style="padding: 12px 15px; border: 1px solid #ddd;">Submission Name</th>
+            <th style="padding: 12px 15px; border: 1px solid #ddd;">Deadline 1</th>
+            <th style="padding: 12px 15px; border: 1px solid #ddd;">Deadline 2</th>
+            <th style="padding: 12px 15px; border: 1px solid #ddd;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var bgColor = string.Empty;
+
+            if (item.Deadline_2 < DateTime.Now)
+            {
+                bgColor = "background-color: #e74c3c;"; // red
+            }
+            else if (item.Deadline_1 < DateTime.Now)
+            {
+                bgColor = "background-color: #ffcc00;"; // yellow
+            }
+            else
+            {
+                bgColor = "background-color: #dff0d8;"; // green
+            }
+            <tr style="@bgColor; border-bottom: 1px solid #dddddd;">
+                <td style="padding: 12px 15px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Name)</td>
+                <td style="padding: 12px 15px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Deadline_1)</td>
+                <td style="padding: 12px 15px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Deadline_2)</td>
+                <td style="padding: 12px 15px; border: 1px solid #ddd;">
+                    <a href="@Url.Action("ViewIdeas", new { submissionid = item.Id })" style="padding: 5px 10px; color: #ffffff; background-color: #009879; text-decoration: none; border-radius: 3px; margin-right: 5px;">View Ideas</a>
+                    @if (User.IsInRole("Manager"))
+                    {
+                        <a href="@Url.Action("ExportZIP", new { submissionid = item.Id })" style="padding: 5px 10px; color: #ffffff; background-color: #009879; text-decoration: none; border-radius: 3px; margin-right: 5px;">Export ZIP</a>
+                        <a href="@Url.Action("ExportExcel", new { submissionid = item.Id })" style="padding: 5px 10px; color: #ffffff; background-color: #009879; text-decoration: none; border-radius: 3px; margin-right: 5px;">Export Excel</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

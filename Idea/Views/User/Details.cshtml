@@ -1,0 +1,60 @@
+﻿@model Idea.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<h1 style="font-family: Arial, sans-serif; font-size: 1.5rem; color: #333; text-align: center;">@ViewData["Title"] (<em>@Model.UserName</em>)</h1>
+
+<div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h4 style="color: #555; font-weight: bold;">Account Information</h4>
+    <hr style="border: 1px solid #ddd; margin: 10px 0;" />
+    <dl class="row">
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Username</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.UserName</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Normalized Username</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.NormalizedUserName</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Email</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.Email</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Normalized Email</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.NormalizedEmail</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Email Confirmed</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.EmailConfirmed</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Password Hash</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.PasswordHash</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Security Stamp</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.SecurityStamp</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Concurrency Stamp</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.ConcurrencyStamp</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Phone Number</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.PhoneNumber</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Phone Number Confirmed</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.PhoneNumberConfirmed</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Two Factor Enabled</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.TwoFactorEnabled</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Lockout End</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.LockoutEnd</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Lockout Enabled</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.LockoutEnabled</dd>
+
+        <dt class="col-sm-3" style="font-weight: bold; color: #333;">Access Failed Count</dt>
+        <dd class="col-sm-9" style="color: #444;">@Model.AccessFailedCount</dd>
+    </dl>
+</div>
+
+<div style="margin-top: 15px; text-align: center;">
+    @* <a asp-action="Edit" asp-route-id="@Model.Id" style="padding: 8px 16px; background-color: #009879; color: #ffffff; text-decoration: none; border-radius: 4px; margin-right: 10px;">Edit</a> *@
+    <a asp-action="Index" style="color: #009879; text-decoration: none; font-size: 1rem;">Back to List</a>
+</div>

@@ -1,0 +1,70 @@
+﻿@model Idea.Models.NIdea
+
+@{
+    ViewData["Title"] = "Add Idea";
+}
+
+<h1 style="font-family: Arial, sans-serif; font-size: 1.5rem; color: #333;">Add Idea</h1>
+
+<h4 style="color: #555;">Submit Your Idea</h4>
+<hr style="border: 1px solid #ddd; margin: 10px 0;" />
+
+<div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="AddIdea" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="SubmissionId" value="@ViewBag.SubmissionId">
+                <input type="hidden" asp-for="UserId" value="@ViewBag.UserId">
+                <input type="hidden" asp-for="View" value="0" />
+                <input type="hidden" asp-for="FilePath" value="" />
+
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label" style="font-weight: bold; color: #333;"></label>
+                    <input asp-for="Title" class="form-control" style="padding: 10px; border-radius: 4px; border: 1px solid #ccc;" />
+                    <span asp-validation-for="Title" class="text-danger" style="color: #e74c3c;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Brief" class="control-label" style="font-weight: bold; color: #333;"></label>
+                    <input asp-for="Brief" class="form-control" style="padding: 10px; border-radius: 4px; border: 1px solid #ccc;" />
+                    <span asp-validation-for="Brief" class="text-danger" style="color: #e74c3c;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Content" class="control-label" style="font-weight: bold; color: #333;"></label>
+                    <input asp-for="Content" class="form-control" style="padding: 10px; border-radius: 4px; border: 1px solid #ccc;" />
+                    <span asp-validation-for="Content" class="text-danger" style="color: #e74c3c;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">File</label>
+                    <input type="file" name="file" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" name="isAcceptTerms" value="True" />
+                    <span style="font-weight: bold;">Accept Terms</span>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="CategoryId" class="control-label" style="font-weight: bold; color: #333;"></label>
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                </div>
+
+                <div style="text-align: right;">
+                    <input type="submit" value="Create" style="padding: 8px 16px; background-color: #009879; color: #ffffff; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem;" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 20px;">
+    <a asp-action="ViewIdeas" asp-route-submissionid="@ViewBag.SubmissionId" style="color: #009879; text-decoration: none; font-size: 1rem;">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

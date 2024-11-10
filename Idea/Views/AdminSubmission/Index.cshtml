@@ -1,0 +1,37 @@
+@model IEnumerable<Idea.Models.Submission>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Manage Submission</h1>
+
+<p>
+    <a href="@Url.Action("Create")" style="padding: 8px 12px; color: #ffffff; background-color: #009879; text-decoration: none; border-radius: 4px;">Create New</a>
+</p>
+
+<table style="width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 1rem; font-family: Arial, sans-serif; min-width: 400px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <thead>
+        <tr style="background-color: #009879; color: #ffffff; text-align: left;">
+            <th style="padding: 12px 15px; border: 1px solid #ddd;">Submission Name</th>
+            <th style="padding: 12px 15px; border: 1px solid #ddd;">Deadline 1</th>
+            <th style="padding: 12px 15px; border: 1px solid #ddd;">Deadline 2</th>
+            <th style="padding: 12px 15px; border: 1px solid #ddd;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="border-bottom: 1px solid #dddddd;">
+                <td style="padding: 12px 15px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Name)</td>
+                <td style="padding: 12px 15px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Deadline_1)</td>
+                <td style="padding: 12px 15px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Deadline_2)</td>
+                <td style="padding: 12px 15px; border: 1px solid #ddd;">
+                    <a href="@Url.Action("Edit", new { id = item.Id })" style="padding: 5px 10px; color: #ffffff; background-color: #009879; text-decoration: none; border-radius: 3px; margin-right: 5px;">Edit</a>
+                    <a href="@Url.Action("Details", new { id = item.Id })" style="padding: 5px 10px; color: #ffffff; background-color: #009879; text-decoration: none; border-radius: 3px; margin-right: 5px;">Details</a>
+                    <a href="@Url.Action("Delete", new { id = item.Id })" style="padding: 5px 10px; color: #ffffff; background-color: #e74c3c; text-decoration: none; border-radius: 3px;">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,50 @@
+/* Sidebar Styles */
+.sidebar[b-7yobp07771] {
+  min-width: 170px;
+  max-width: 220px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  transition: width 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.collapsed[b-7yobp07771] {
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.sidebar .login-partial[b-7yobp07771] {
+  padding: 10px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.content[b-7yobp07771] {
+  margin-left: 250px;
+  transition: margin-left 0.3s;
+}
+
+.content.expanded[b-7yobp07771] {
+  margin-left: 0;
+}
+
+a.nav-link[b-7yobp07771] {
+  color: #0077cc;
+}
+
+.footer[b-7yobp07771] {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  transition: left 0.3s;
+}
+
+.footer.expanded[b-7yobp07771] {
+  left: 0;
+  width: 100%;
+}
+

@@ -1,0 +1,76 @@
+﻿@model Idea.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<h1 style="font-family: Arial, sans-serif; font-size: 1.5rem; color: #333; text-align: center; margin-bottom: 20px;">Edit User</h1>
+<h4 style="color: #555; text-align: center;">User: <em>@Model.UserName</em></h4>
+<hr style="border: 1px solid #ddd; margin: 10px 0;" />
+
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <form asp-action="Edit" style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="NormalizedUserName" />
+            <input type="hidden" asp-for="NormalizedEmail" />
+            <input type="hidden" asp-for="EmailConfirmed" />
+            <input type="hidden" asp-for="PasswordHash" />
+            <input type="hidden" asp-for="SecurityStamp" />
+            <input type="hidden" asp-for="ConcurrencyStamp" />
+            <input type="hidden" asp-for="PhoneNumberConfirmed" />
+
+            <!-- Account Information Section -->
+            <h5 style="font-family: Arial, sans-serif; color: #333; font-size: 1.2rem; margin-bottom: 15px;">Account Information</h5>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label" style="font-weight: bold; color: #333;">Username</label>
+                <input asp-for="UserName" class="form-control" style="border: 1px solid #ccc; border-radius: 4px;" />
+                <span asp-validation-for="UserName" class="text-danger" style="color: red;"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label" style="font-weight: bold; color: #333;">Email</label>
+                <input asp-for="Email" class="form-control" style="border: 1px solid #ccc; border-radius: 4px;" />
+                <span asp-validation-for="Email" class="text-danger" style="color: red;"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label" style="font-weight: bold; color: #333;">Phone Number</label>
+                <input asp-for="PhoneNumber" class="form-control" style="border: 1px solid #ccc; border-radius: 4px;" />
+                <span asp-validation-for="PhoneNumber" class="text-danger" style="color: red;"></span>
+            </div>
+
+            <!-- Profile Section -->
+            <h5 style="font-family: Arial, sans-serif; color: #333; font-size: 1.2rem; margin-top: 30px; margin-bottom: 15px;">Profile</h5>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label" style="font-weight: bold; color: #333;">First Name</label>
+                <input asp-for="FirstName" class="form-control" style="border: 1px solid #ccc; border-radius: 4px;" />
+                <span asp-validation-for="FirstName" class="text-danger" style="color: red;"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label" style="font-weight: bold; color: #333;">Last Name</label>
+                <input asp-for="LastName" class="form-control" style="border: 1px solid #ccc; border-radius: 4px;" />
+                <span asp-validation-for="LastName" class="text-danger" style="color: red;"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label" style="font-weight: bold; color: #333;">Gender</label>
+                <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control" style="border: 1px solid #ccc; border-radius: 4px;">
+                </select>
+                <span asp-validation-for="Gender" class="text-danger" style="color: red;"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Birthday" class="control-label" style="font-weight: bold; color: #333;">Birthday</label>
+                <input asp-for="Birthday" class="form-control" style="border: 1px solid #ccc; border-radius: 4px;" />
+                <span asp-validation-for="Birthday" class="text-danger" style="color: red;"></span>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <input type="submit" value="Save" style="padding: 8px 16px; background-color: #009879; color: #ffffff; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem;" />
+                <a asp-action="Index" style="margin-left: 10px; color: #009879; text-decoration: none; font-size: 1rem;">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
